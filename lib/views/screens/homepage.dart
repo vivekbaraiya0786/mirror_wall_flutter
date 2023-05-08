@@ -28,7 +28,7 @@ class _HomepageState extends State<Homepage> {
       options: PullToRefreshOptions(),
       onRefresh: () async {
         await inAppWebViewController?.reload();
-        await Future.delayed(Duration(seconds: 1));
+        await Future.delayed(const Duration(seconds: 1));
         pullToRefreshController?.endRefreshing();
       },
     );
@@ -164,15 +164,17 @@ class _HomepageState extends State<Homepage> {
                   child: ListView.builder(
                     itemCount: BookMark.length,
                     itemBuilder: (context, i) => ListTile(
-                      title: Text("${BookMark[i]}"),
+                      title: Text("${Name[i]}"),
+                      subtitle: Text("${BookMark[i]}"),
                       trailing: IconButton(
                           onPressed: () {
                             setState(() {
                               BookMark.remove(BookMark[i]);
-                              Navigator.of(context).pop();
+                              Name.remove(Name[i]);
+                              // Navigator.of(context).pop();
                             });
                           },
-                          icon: Icon(Icons.delete)),
+                          icon: const Icon(Icons.delete)),
                     ),
                   ),
                 ),
@@ -186,12 +188,12 @@ class _HomepageState extends State<Homepage> {
 
   showDialogBox(){
     showCupertinoDialog(context: context, builder: (context) => CupertinoAlertDialog(
-      title: Text("No Connection"),
-      content: Text("Please check your internet connectivity"),
+      title: const Text("No Connection"),
+      content: const Text("Please check your internet connectivity"),
       actions: [
         TextButton(onPressed: () {
           Navigator.pop(context);
-        }, child: Text("OK"),),
+        }, child: const Text("OK"),),
       ],
     ),);
   }
@@ -264,8 +266,8 @@ class _HomepageState extends State<Homepage> {
               .connectivityModel
               .ConnectivityStatus ==
               "Waiting..")
-        ?Center(
-            child:Text("Please check your intrnet connection",
+        ?const Center(
+            child:Text("Please check your internet connection",
             style: TextStyle(
               fontWeight: FontWeight.bold,
             )),
@@ -355,7 +357,9 @@ class _HomepageState extends State<Homepage> {
                               IconButton(
                                 onPressed: () async {
                                   setState(() {
-                                    BookMark.add(urlBookmark);
+                                    // BookMark.add(urlBookmark);
+                                    BookMark.add(inAppWebViewController?.getUrl());
+                                    Name.add(inAppWebViewController?.getTitle());
                                   });
                                 },
                                 icon: const Icon(
@@ -408,7 +412,6 @@ class _HomepageState extends State<Homepage> {
           )),
     );
   }
-
 }
 
 
