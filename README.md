@@ -16,6 +16,10 @@ Project Technologies:
 - Dart language
 - Flutter framework with MVC and Provider architecture
 
+
+<img  src="https://user-images.githubusercontent.com/126376629/236743441-2e0ddaf8-2b7d-4143-9078-1e93cc970d08.mp4" width="220px">
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
