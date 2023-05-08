@@ -19,7 +19,6 @@ void main()async{
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ConnectivityProvier()),
-        // ChangeNotifierProvider(create: (context) => Homeprovider()),
       ],
       builder: (context, child) {
         return MaterialApp(

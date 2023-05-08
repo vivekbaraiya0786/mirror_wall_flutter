@@ -3,8 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:mirror_wall/controllers/providers/connectivity_provider.dart';
-import 'package:provider/provider.dart';
-import 'package:provider/provider.dart';
+import 'package:mirror_wall/utils/attributes.dart';
 import 'package:provider/provider.dart';
 
 class Homepage extends StatefulWidget {
@@ -15,14 +14,9 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  InAppWebViewController? inAppWebViewController;
-  String Url = "";
-  String SelectedOption = "Option 1";
-  List<String> BookMark = [];
-  String urlBookmark = "";
+
 
   TextEditingController SearchController = TextEditingController();
-  PullToRefreshController? pullToRefreshController;
 
   @override
   void initState() {
