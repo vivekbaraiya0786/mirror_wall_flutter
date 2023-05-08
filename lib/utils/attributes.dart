@@ -9,6 +9,6 @@ List BookMark = [];
 List Name = [];
 
 String urlBookmark = "";
-
+double liner = 0;
 PullToRefreshController? pullToRefreshController;
 

@@ -6,6 +6,7 @@ import 'package:mirror_wall/views/screens/homepage.dart';
 import 'package:provider/provider.dart';
 
 import 'controllers/providers/connectivity_provider.dart';
+import 'controllers/providers/linear_provider.dart';
 
 
 void main()async{
@@ -19,6 +20,7 @@ void main()async{
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ConnectivityProvier()),
+        ChangeNotifierProvider(create: (context) => LinerProvider()),
       ],
       builder: (context, child) {
         return MaterialApp(
