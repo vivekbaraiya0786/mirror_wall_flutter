@@ -24,7 +24,7 @@ class _HomepageState extends State<Homepage> {
         .checkInternetConnectvity();
 
     pullToRefreshController = PullToRefreshController(
-      options: PullToRefreshOptions(),
+      // options: PullToRefreshOptions(),
       onRefresh: () async {
         await inAppWebViewController?.reload();
       },
@@ -32,194 +32,13 @@ class _HomepageState extends State<Homepage> {
   }
 
   void showAlertDialog(String selectedOption) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, setState) => AlertDialog(
-            title: const Text("Search Engine"),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                RadioListTile(
-                  fillColor: MaterialStateProperty.all(
-                    Colors.purple,
-                  ),
-                  title: const Text("Google"),
-                  value: "https://www.google.com/",
-                  groupValue: Url,
-                  onChanged: (value) {
-                    setState(() {
-                      Url = value!;
-                    });
-                    inAppWebViewController!.loadUrl(
-                      urlRequest: URLRequest(
-                        url: Uri.parse(Url),
-                      ),
-                    );
-                    Navigator.of(context).pop();
-                  },
-                ),
-                RadioListTile(
-                  fillColor: MaterialStateProperty.all(
-                    Colors.purple,
-                  ),
-                  title: const Text("Yahoo"),
-                  value: "https://www.yahoo.com/",
-                  groupValue: Url,
-                  onChanged: (value) {
-                    setState(() {
-                      Url = value!;
-                    });
-                    inAppWebViewController!.loadUrl(
-                      urlRequest: URLRequest(
-                        url: Uri.parse(Url),
-                      ),
-                    );
-                    Navigator.of(context).pop();
-                  },
-                ),
-                RadioListTile(
-                  fillColor: MaterialStateProperty.all(
-                    Colors.purple,
-                  ),
-                  title: const Text("Bing"),
-                  value: "https://www.bing.com/",
-                  groupValue: Url,
-                  onChanged: (value) {
-                    setState(() {
-                      Url = value!;
-                    });
-                    inAppWebViewController!
-                        .loadUrl(urlRequest: URLRequest(url: Uri.parse(Url)));
-                    Navigator.of(context).pop();
-                  },
-                ),
-                RadioListTile(
-                  fillColor: MaterialStateProperty.all(
-                    Colors.purple,
-                  ),
-                  title: const Text("Duck Duck Go"),
-                  value: "https://duckduckgo.com/",
-                  groupValue: Url,
-                  onChanged: (value) {
-                    setState(() {
-                      Url = value!;
-                    });
-                    inAppWebViewController!
-                        .loadUrl(urlRequest: URLRequest(url: Uri.parse(Url)));
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
+
   }
 
   void bookmarklist(String selectedOption) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) => StatefulBuilder(
-        builder: (context, setState) {
-          return Container(
-            height: MediaQuery.of(context).size.height * 0.7,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width * 1,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          border: const Border(
-                            bottom: BorderSide(
-                              color: Colors.black,
-                              width: 2,
-                            ),
-                          ),
-                        ),
-                        child: TextButton.icon(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          icon: const Icon(
-                            Icons.close,
-                            color: Colors.black,
-                          ),
-                          label: const Text(
-                            "Dismiss",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  flex: 10,
-                  child: Container(
-                    child: ListView.builder(
-                      itemCount: BookMark.length,
-                      itemBuilder: (context, i) => ListTile(
-                        title: Text("${Name[i]}"),
-                        subtitle: Text("${BookMark[i]}"),
-                        trailing: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                BookMark.remove(BookMark[i]);
-                                Name.remove(Name[i]);
-                                // Navigator.of(context).pop();
-                              });
-                            },
-                            icon: const Icon(Icons.delete)),
-                        onTap:(){
-                          inAppWebViewController?.loadUrl(
-                              urlRequest: URLRequest(
-                                  url:
-                                  BookMark[i]));
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
+
   }
 
-  showDialogBox() {
-    showCupertinoDialog(
-      context: context,
-      builder: (context) => CupertinoAlertDialog(
-        title: const Text("No Connection"),
-        content: const Text("Please check your internet connectivity"),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text("OK"),
-          ),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -273,13 +92,173 @@ class _HomepageState extends State<Homepage> {
                 ),
               ],
               onSelected: (selectedOption) {
-                setState(() {
-                  SelectedOption = selectedOption;
-                });
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) => StatefulBuilder(
+                      builder: (context, setState) {
+                        return Container(
+                          height: MediaQuery.of(context).size.height * 0.7,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width * 1,
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey.shade200,
+                                        border:Border.all(
+                                          color: Colors.black,
+                                          width: 2,
+                                        )
+                                      ),
+                                      child: TextButton.icon(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        icon: const Icon(
+                                          Icons.close,
+                                          color: Colors.black,
+                                        ),
+                                        label: const Text(
+                                          "Dismiss",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 10,
+                                child: Container(
+                                  child: ListView.builder(
+                                    itemCount: BookMark.length,
+                                    itemBuilder: (context, i) => ListTile(
+                                      title: Text("${Name[i]}"),
+                                      subtitle: Text("${BookMark[i]}"),
+                                      trailing: IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              BookMark.remove(BookMark[i]);
+                                              Name.remove(Name[i]);
+                                              // Navigator.of(context).pop();
+                                            });
+                                          },
+                                          icon: const Icon(Icons.delete)),
+                                      onTap:(){
+                                        inAppWebViewController?.loadUrl(
+                                            urlRequest: URLRequest(
+                                                url:
+                                                BookMark[i]));
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  );
                 if (selectedOption == "Option 1") {
                   bookmarklist(selectedOption);
                 } else if (selectedOption == "Option 2") {
-                  showAlertDialog(selectedOption);
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return StatefulBuilder(
+                        builder: (context, setState) => AlertDialog(
+                          title: const Text("Search Engine"),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              RadioListTile(
+                                fillColor: MaterialStateProperty.all(
+                                  Colors.purple,
+                                ),
+                                title: const Text("Google"),
+                                value: "https://www.google.com/",
+                                groupValue: Url,
+                                onChanged: (value) {
+                                  setState(() {
+                                    Url = value!;
+                                  });
+                                  inAppWebViewController!.loadUrl(
+                                    urlRequest: URLRequest(
+                                      url: Uri.parse(Url),
+                                    ),
+                                  );
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              RadioListTile(
+                                fillColor: MaterialStateProperty.all(
+                                  Colors.purple,
+                                ),
+                                title: const Text("Yahoo"),
+                                value: "https://www.yahoo.com/",
+                                groupValue: Url,
+                                onChanged: (value) {
+                                  setState(() {
+                                    Url = value!;
+                                  });
+                                  inAppWebViewController!.loadUrl(
+                                    urlRequest: URLRequest(
+                                      url: Uri.parse(Url),
+                                    ),
+                                  );
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              RadioListTile(
+                                fillColor: MaterialStateProperty.all(
+                                  Colors.purple,
+                                ),
+                                title: const Text("Bing"),
+                                value: "https://www.bing.com/",
+                                groupValue: Url,
+                                onChanged: (value) {
+                                  setState(() {
+                                    Url = value!;
+                                  });
+                                  inAppWebViewController!
+                                      .loadUrl(urlRequest: URLRequest(url: Uri.parse(Url)));
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              RadioListTile(
+                                fillColor: MaterialStateProperty.all(
+                                  Colors.purple,
+                                ),
+                                title: const Text("Duck Duck Go"),
+                                value: "https://duckduckgo.com/",
+                                groupValue: Url,
+                                onChanged: (value) {
+                                  setState(() {
+                                    Url = value!;
+                                  });
+                                  inAppWebViewController!
+                                      .loadUrl(urlRequest: URLRequest(url: Uri.parse(Url)));
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
                 }
               },
             ),
